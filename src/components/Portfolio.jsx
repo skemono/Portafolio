@@ -301,32 +301,6 @@ const Portfolio = () => {
                     />
                 </motion.div>
             </AnimatePresence>
-
-            {/* Centered Instructions - RESPONSIVE */}
-            <motion.div
-                style={{
-                    position: 'fixed',
-                    bottom: 'clamp(0.5rem, 2vw, 1rem)',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    zIndex: 1000,
-                    color: 'rgba(255, 255, 255, 0.7)',
-                    fontSize: 'clamp(0.7rem, 2vw, 0.9rem)',
-                    textAlign: 'center',
-                    textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
-                    width: 'auto',
-                    whiteSpace: 'nowrap',
-                    padding: '0.5rem 1rem',
-                    background: 'rgba(0, 0, 0, 0.3)',
-                    borderRadius: '20px',
-                    backdropFilter: 'blur(10px)'
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2, duration: 1 }}
-            >
-                <div>Navegar: Flechas • Scroll • Click flechas/puntos</div>
-            </motion.div>
         </motion.div>
     )
 }
