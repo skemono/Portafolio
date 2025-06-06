@@ -94,7 +94,7 @@ const PlanetIntro = ({ onComplete }) => {
         directionalLight.position.set(5, 3, 5)
         scene.add(directionalLight)
 
-        // Camera animation sequence
+        // Camera animation sequence - SIMPLIFIED TO JUST ORBIT AND FADE
         camera.position.set(0, 0, 15)
         camera.lookAt(0, 0, 0)
 
@@ -106,32 +106,26 @@ const PlanetIntro = ({ onComplete }) => {
             planet.rotation.y += 0.003
             stars.rotation.y += 0.0005
             
-            // Camera animation phases
-            if (time < 4) {
-                // Orbit around planet (4 seconds)
+            // SIMPLIFIED ANIMATION: Just orbit around planet and fade out
+            if (time < 7) {
+                // Orbit around planet (7 seconds)
                 const orbitRadius = 12
-                camera.position.x = Math.sin(time * 0.4) * orbitRadius
-                camera.position.z = Math.cos(time * 0.4) * orbitRadius
-                camera.position.y = Math.sin(time * 0.2) * 3
-                camera.lookAt(0, 0, 0)
-            } else if (time < 6) {
-                // Move to front view (2 seconds)
-                const progress = (time - 4) / 2
-                camera.position.x = 0
-                camera.position.y = 0
-                camera.position.z = 12
-                camera.lookAt(0, 0, 0)
-            } else if (time < 8) {
-                // Zoom in close (2 seconds)
-                const zoomProgress = (time - 6) / 2
-                const startZ = 12
-                const endZ = 1.5
-                camera.position.z = startZ + (endZ - startZ) * zoomProgress
+                camera.position.x = Math.sin(time * 0.3) * orbitRadius
+                camera.position.z = Math.cos(time * 0.3) * orbitRadius
+                camera.position.y = Math.sin(time * 0.15) * 3
                 camera.lookAt(0, 0, 0)
             } else {
-                // Fade to black and complete (1 second)
-                const fadeProgress = (time - 8) / 1
+                // Continue orbiting but fade to black (2 seconds)
+                const orbitRadius = 12
+                camera.position.x = Math.sin(time * 0.3) * orbitRadius
+                camera.position.z = Math.cos(time * 0.3) * orbitRadius
+                camera.position.y = Math.sin(time * 0.15) * 3
+                camera.lookAt(0, 0, 0)
+                
+                // Fade out
+                const fadeProgress = (time - 7) / 2
                 renderer.domElement.style.opacity = String(Math.max(0, 1 - fadeProgress))
+                
                 if (time > 9) {
                     onComplete()
                     return
@@ -198,16 +192,18 @@ const PlanetIntro = ({ onComplete }) => {
                 style={{
                     position: 'absolute',
                     top: '15%',
-                    width: '100%',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
                     textAlign: 'center',
                     color: 'white',
                     fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                     fontWeight: 'bold',
                     textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
-                    zIndex: 10
+                    zIndex: 10,
+                    whiteSpace: 'nowrap'
                 }}
             >
-                Portafolio
+                June Herrera Watanabe
             </motion.div>
 
             <motion.div
@@ -217,15 +213,17 @@ const PlanetIntro = ({ onComplete }) => {
                 style={{
                     position: 'absolute',
                     bottom: '20%',
-                    width: '100%',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
                     textAlign: 'center',
                     color: 'white',
                     fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
                     textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
-                    zIndex: 10
+                    zIndex: 10,
+                    whiteSpace: 'nowrap'
                 }}
             >
-                June Herrera Watanabe
+                Ingeniería en Ciencias de la Computación
             </motion.div>
         </motion.div>
     )
